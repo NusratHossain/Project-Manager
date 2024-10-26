@@ -4,49 +4,49 @@ export const taskList = [
         title: "Content Writer Content Writer Content Writer",
         description: "Prepare proctor for client meeting",
         date: "2024-02-20",
-        status: "to-do"
+        category: "to-do"
     },
     {
         id: crypto.randomUUID(),
         title: "Develop API",
         description: "Prepare proctor for client meeting",
         date: "2024-02-20",
-        status: "to-do"
+        category: "to-do"
     },
     {
         id: crypto.randomUUID(),
         title: "Deploy to VPS",
         description: "Prepare proctor for client meeting",
         date: "2024-02-20",
-        status: "to-do"
+        category: "to-do"
     },
     {
         id: crypto.randomUUID(),
         title: "Content Writer -  On-Progress",
         description: "Prepare proctor for client meeting",
         date: "2024-02-20",
-        status: "on-progress"
+        category: "on-progress"
     },
     {
         id: crypto.randomUUID(),
         title: "Content Writer - Done",
         description: "Make Promotional Ads for Instagram fastos",
         date: "2024-02-20",
-        status: "done"
+        category: "done"
     },
     {
         id: crypto.randomUUID(),
         title: "Content Writer - Done",
         description: "Prepare proctor for client meeting",
         date: "2024-02-20",
-        status: "done"
+        category: "done"
     },
     {
         id: crypto.randomUUID(),
         title: "Content Writer - Revise",
         description: "Prepare proctor for client meeting",
         date: "2024-02-20",
-        status: "revise"
+        category: "revise"
     },
 ]
 
@@ -57,7 +57,9 @@ export const taskCategories = [
     { type: "Revise", bgColor: "bg-rose-500", textColor: "text-rose-500" }
 ]
 
-// let formattedDate = new Date(task.date).toLocaleDateString(
-//     "en-GB",
-//     { year: "numeric", month: "long", day: "2-digit" }
-//   );
+export const defaultTask = {
+    title: "",
+    description: "",
+    date: "",
+    category: ""
+}

@@ -1,15 +1,22 @@
-import { taskList } from "../data/Tasks";
+import { useTasks } from "../contexts/TaskContext";
+import TaskListEmpty from "../TaskListEmpty";
 import SortAsending from "./svg/SortAsending";
 import TaskCard from "./TaskCard";
 
-export default function ListBoard() {
-    
-  const toDoList = taskList.filter((item) => item.status === "to-do");
-  const onProgressList = taskList.filter(
-    (item) => item.status === "on-progress"
+export default function ListBoard({
+  filteredTasks,
+  setShowModal,
+  setTaskToUpdate,
+}) {
+  const originalTasks = useTasks();
+  const tasks = filteredTasks?.length > 0 ? filteredTasks : originalTasks;
+
+  const toDoList = tasks.filter((item) => item.category === "to-do");
+  const onProgressList = tasks.filter(
+    (item) => item.category === "on-progress"
   );
-  const doneList = taskList.filter((item) => item.status === "done");
-  const reviseList = taskList.filter((item) => item.status === "revise");
+  const doneList = tasks.filter((item) => item.category === "done");
+  const reviseList = tasks.filter((item) => item.category === "revise");
 
   return (
     <div className="-mx-2 mb-6 flex flex-wrap">
@@ -20,9 +27,19 @@ export default function ListBoard() {
             <SortAsending />
           </div>
           <div>
-            {toDoList.map((task, index) => (
-              <TaskCard key={index} task={task} color={"text-indigo-600"} />
-            ))}
+            {toDoList.length > 0 ? (
+              toDoList.map((task, index) => (
+                <TaskCard
+                  setTaskToUpdate={setTaskToUpdate}
+                  setShowModal={setShowModal}
+                  key={index}
+                  task={task}
+                  color={"text-indigo-600"}
+                />
+              ))
+            ) : (
+              <TaskListEmpty />
+            )}
           </div>
         </div>
       </div>
@@ -36,9 +53,19 @@ export default function ListBoard() {
             <SortAsending />
           </div>
           <div>
-            {onProgressList.map((task, index) => (
-              <TaskCard key={index} task={task} color={"text-yellow-500"} />
-            ))}
+            {onProgressList.length > 0 ? (
+              onProgressList.map((task, index) => (
+                <TaskCard
+                  setTaskToUpdate={setTaskToUpdate}
+                  setShowModal={setShowModal}
+                  key={index}
+                  task={task}
+                  color={"text-yellow-500"}
+                />
+              ))
+            ) : (
+              <TaskListEmpty />
+            )}
           </div>
         </div>
       </div>
@@ -51,9 +78,19 @@ export default function ListBoard() {
           </div>
 
           <div>
-            {doneList.map((task, index) => (
-              <TaskCard key={index} task={task} color={"text-teal-500"} />
-            ))}
+            {doneList.length > 0 ? (
+              doneList.map((task, index) => (
+                <TaskCard
+                  setTaskToUpdate={setTaskToUpdate}
+                  setShowModal={setShowModal}
+                  key={index}
+                  task={task}
+                  color={"text-teal-500"}
+                />
+              ))
+            ) : (
+              <TaskListEmpty />
+            )}
           </div>
         </div>
       </div>
@@ -67,9 +104,19 @@ export default function ListBoard() {
             <SortAsending />
           </div>
           <div>
-            {reviseList.map((task, index) => (
-              <TaskCard key={index} task={task} color={"text-rose-500"} />
-            ))}
+            {reviseList.length > 0 ? (
+              reviseList.map((task, index) => (
+                <TaskCard
+                  setTaskToUpdate={setTaskToUpdate}
+                  setShowModal={setShowModal}
+                  key={index}
+                  task={task}
+                  color={"text-rose-500"}
+                />
+              ))
+            ) : (
+              <TaskListEmpty />
+            )}
           </div>
         </div>
       </div>
