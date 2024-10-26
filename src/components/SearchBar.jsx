@@ -13,7 +13,7 @@ export default function SearchBar({ setFilteredTasks }) {
       ? tasks.filter((task) =>
           task.title.toLowerCase().includes(searchTerm.toLowerCase())
         )
-      : [];
+      :[...tasks];
 
     setFilteredTasks(filteredTasks);
   };

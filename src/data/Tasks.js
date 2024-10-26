@@ -38,7 +38,7 @@ export const taskList = [
         id: crypto.randomUUID(),
         title: "Content Writer - Done",
         description: "Prepare proctor for client meeting",
-        date: "2024-02-20",
+        date: "2024-02-18",
         category: "done"
     },
     {
@@ -48,13 +48,6 @@ export const taskList = [
         date: "2024-02-20",
         category: "revise"
     },
-]
-
-export const taskCategories = [
-    { type: "To-Do", bgColor: "bg-indigo-600", textColor: "text-indigo-500" },
-    { type: "On-Progress", bgColor: "bg-yellow-500", textColor: "text-yellow-500" },
-    { type: "Done", bgColor: "bg-teal-500", textColor: "text-teal-500" },
-    { type: "Revise", bgColor: "bg-rose-500", textColor: "text-rose-500" }
 ]
 
 export const defaultTask = {

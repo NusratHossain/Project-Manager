@@ -6,13 +6,13 @@ import TopBar from "./TopBar";
 
 export default function TaskBoard() {
   const tasks = useTasks();
-  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [filteredTasks, setFilteredTasks] = useState(tasks);
 
   return (
-    <TaskContextProvider filteredTasks={tasks}>
+    <TaskContextProvider>
       <main className="flex-1 overflow-y-auto overflow-x-hidden">
         <TopBar setFilteredTasks={setFilteredTasks} />
-        <TaskDetails filteredTasks={filteredTasks} />
+        <TaskDetails filteredTasks={filteredTasks} setFilteredTasks={setFilteredTasks} />
       </main>
     </TaskContextProvider>
   );

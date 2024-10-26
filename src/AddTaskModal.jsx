@@ -4,6 +4,8 @@ import { defaultTask } from "./data/Tasks";
 import { FormEdittingValidation, FormValidation } from "./utils/formValidation";
 
 export default function AddTaskModal({
+  filteredTasks,
+  setFilteredTasks,
   taskToUpdate = null,
   setTaskToUpdate,
   setShowModal,
@@ -28,7 +30,6 @@ export default function AddTaskModal({
     event.preventDefault();
     const { notValidated, fieldsNotFilled } = FormValidation(task);
     const hasTaskChanged = FormEdittingValidation(tasks, task);
-    
 
     if (notValidated) {
       alert(`Please fill in all the mandatory fields: ${fieldsNotFilled}.`);
@@ -37,6 +38,10 @@ export default function AddTaskModal({
 
     if (isAdd) {
       addTask(task);
+      let sortedTasks = filteredTasks.sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
+      setFilteredTasks([...sortedTasks, task]);
     } else {
       if (!hasTaskChanged) {
         alert(
@@ -45,6 +50,10 @@ export default function AddTaskModal({
         return;
       }
       updateTask(task);
+      let newTaskList = filteredTasks
+        .filter((item) => item.id !== task.id)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+      setFilteredTasks([...newTaskList, task]);
     }
 
     resetForm();

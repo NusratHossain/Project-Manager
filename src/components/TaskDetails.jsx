@@ -3,7 +3,7 @@ import AddTaskModal from "../AddTaskModal";
 import AddTask from "./AddTask";
 import ListBoard from "./ListBoard";
 
-export default function TaskDetails({ filteredTasks }) {
+export default function TaskDetails({ filteredTasks, setFilteredTasks }) {
   const [showModal, setShowModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
 
@@ -18,6 +18,8 @@ export default function TaskDetails({ filteredTasks }) {
           <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
           <div className="relative w-full max-w-xl p-8 mx-auto">
             <AddTaskModal
+              filteredTasks={filteredTasks}
+              setFilteredTasks={setFilteredTasks}
               taskToUpdate={taskToUpdate}
               setTaskToUpdate={setTaskToUpdate}
               setShowModal={setShowModal}

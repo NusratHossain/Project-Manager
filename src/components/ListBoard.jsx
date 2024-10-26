@@ -1,4 +1,5 @@
-import { useTasks } from "../contexts/TaskContext";
+// import { useTasks } from "../contexts/TaskContext";
+import { useState } from "react";
 import TaskListEmpty from "../TaskListEmpty";
 import SortAsending from "./svg/SortAsending";
 import TaskCard from "./TaskCard";
@@ -8,8 +9,13 @@ export default function ListBoard({
   setShowModal,
   setTaskToUpdate,
 }) {
-  const originalTasks = useTasks();
-  const tasks = filteredTasks?.length > 0 ? filteredTasks : originalTasks;
+  let tasks = filteredTasks;
+  const [sortingOrders, setSortingOrders] = useState({
+    toDo: true,
+    onProgress: true,
+    done: true,
+    revise: true,
+  });
 
   const toDoList = tasks.filter((item) => item.category === "to-do");
   const onProgressList = tasks.filter(
@@ -18,25 +24,40 @@ export default function ListBoard({
   const doneList = tasks.filter((item) => item.category === "done");
   const reviseList = tasks.filter((item) => item.category === "revise");
 
+  const handleSorting = (listName) => {
+    setSortingOrders((prevOrders) => ({
+      ...prevOrders,
+      [listName]: !prevOrders[listName],
+    }));
+  };
+
   return (
     <div className="-mx-2 mb-6 flex flex-wrap">
       <div className="mb-4 w-full px-2 sm:w-1/2 md:w-1/4">
         <div className="rounded-lg bg-indigo-600 p-4">
           <div className="mb-2 flex items-center justify-between">
             <h3 className="text-lg font-semibold">To-Do ({toDoList.length})</h3>
-            <SortAsending />
+            <button onClick={() => handleSorting("todo")}>
+              <SortAsending />
+            </button>
           </div>
           <div>
             {toDoList.length > 0 ? (
-              toDoList.map((task, index) => (
-                <TaskCard
-                  setTaskToUpdate={setTaskToUpdate}
-                  setShowModal={setShowModal}
-                  key={index}
-                  task={task}
-                  color={"text-indigo-600"}
-                />
-              ))
+              [...toDoList] // Spread into a new array to avoid mutating the original list
+                .sort((a, b) =>
+                  sortingOrders.todo
+                    ? new Date(a.date) - new Date(b.date)
+                    : new Date(b.date) - new Date(a.date)
+                )
+                .map((task, index) => (
+                  <TaskCard
+                    setTaskToUpdate={setTaskToUpdate}
+                    setShowModal={setShowModal}
+                    key={index}
+                    task={task}
+                    color={"text-indigo-600"}
+                  />
+                ))
             ) : (
               <TaskListEmpty />
             )}
@@ -50,19 +71,27 @@ export default function ListBoard({
             <h3 className="text-lg font-semibold">
               On Progress ({onProgressList.length})
             </h3>
-            <SortAsending />
+            <button onClick={() => handleSorting("onProgress")}>
+              <SortAsending />
+            </button>
           </div>
           <div>
             {onProgressList.length > 0 ? (
-              onProgressList.map((task, index) => (
-                <TaskCard
-                  setTaskToUpdate={setTaskToUpdate}
-                  setShowModal={setShowModal}
-                  key={index}
-                  task={task}
-                  color={"text-yellow-500"}
-                />
-              ))
+              [...onProgressList] // Spread into a new array to avoid mutating the original list
+                .sort((a, b) =>
+                  sortingOrders.onProgress
+                    ? new Date(a.date) - new Date(b.date)
+                    : new Date(b.date) - new Date(a.date)
+                )
+                .map((task, index) => (
+                  <TaskCard
+                    setTaskToUpdate={setTaskToUpdate}
+                    setShowModal={setShowModal}
+                    key={index}
+                    task={task}
+                    color={"text-yellow-500"}
+                  />
+                ))
             ) : (
               <TaskListEmpty />
             )}
@@ -74,20 +103,28 @@ export default function ListBoard({
         <div className="rounded-lg bg-teal-500 p-4">
           <div className="mb-2 flex items-center justify-between">
             <h3 className="text-lg font-semibold">Done ({doneList.length})</h3>
-            <SortAsending />
+            <button onClick={() => handleSorting("done")}>
+              <SortAsending />
+            </button>
           </div>
 
           <div>
             {doneList.length > 0 ? (
-              doneList.map((task, index) => (
-                <TaskCard
-                  setTaskToUpdate={setTaskToUpdate}
-                  setShowModal={setShowModal}
-                  key={index}
-                  task={task}
-                  color={"text-teal-500"}
-                />
-              ))
+              [...doneList] // Spread into a new array to avoid mutating the original list
+                .sort((a, b) =>
+                  sortingOrders.done
+                    ? new Date(a.date) - new Date(b.date)
+                    : new Date(b.date) - new Date(a.date)
+                )
+                .map((task, index) => (
+                  <TaskCard
+                    setTaskToUpdate={setTaskToUpdate}
+                    setShowModal={setShowModal}
+                    key={index}
+                    task={task}
+                    color={"text-teal-500"}
+                  />
+                ))
             ) : (
               <TaskListEmpty />
             )}
@@ -101,19 +138,27 @@ export default function ListBoard({
             <h3 className="text-lg font-semibold">
               Revise ({reviseList.length})
             </h3>
-            <SortAsending />
+            <button onClick={() => handleSorting("revise")}>
+              <SortAsending />
+            </button>
           </div>
           <div>
             {reviseList.length > 0 ? (
-              reviseList.map((task, index) => (
-                <TaskCard
-                  setTaskToUpdate={setTaskToUpdate}
-                  setShowModal={setShowModal}
-                  key={index}
-                  task={task}
-                  color={"text-rose-500"}
-                />
-              ))
+              [...reviseList] // Spread into a new array to avoid mutating the original list
+                .sort((a, b) =>
+                  sortingOrders.revise
+                    ? new Date(a.date) - new Date(b.date)
+                    : new Date(b.date) - new Date(a.date)
+                )
+                .map((task, index) => (
+                  <TaskCard
+                    setTaskToUpdate={setTaskToUpdate}
+                    setShowModal={setShowModal}
+                    key={index}
+                    task={task}
+                    color={"text-rose-500"}
+                  />
+                ))
             ) : (
               <TaskListEmpty />
             )}
