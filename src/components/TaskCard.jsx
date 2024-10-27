@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { useTaskDispatcher, useTasks } from "../contexts/TaskContext";
 import { formattedDate } from "../utils/formatDate";
 import Delete from "./svg/Delete";
@@ -19,6 +20,7 @@ export default function TaskCard({
 
   const handleDelete = (taskId) => {
     alert(`Are you sure you want to delete the task??`);
+    toast.success("Task Deleted Successfully!");
     dispatch({ type: "deleted", id: taskId });
     setFilteredTasks(tasks.filter((task) => task.id !== taskId));
   };
