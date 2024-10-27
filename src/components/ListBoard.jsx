@@ -42,7 +42,7 @@ export default function ListBoard({
           </div>
           <div>
             {toDoList.length > 0 ? (
-              [...toDoList] // Spread into a new array to avoid mutating the original list
+              [...toDoList]
                 .sort((a, b) =>
                   sortingOrders.todo
                     ? new Date(a.date) - new Date(b.date)
@@ -76,7 +76,7 @@ export default function ListBoard({
           </div>
           <div>
             {onProgressList.length > 0 ? (
-              [...onProgressList] // Spread into a new array to avoid mutating the original list
+              [...onProgressList]
                 .sort((a, b) =>
                   sortingOrders.onProgress
                     ? new Date(a.date) - new Date(b.date)
@@ -109,7 +109,7 @@ export default function ListBoard({
 
           <div>
             {doneList.length > 0 ? (
-              [...doneList] // Spread into a new array to avoid mutating the original list
+              [...doneList]
                 .sort((a, b) =>
                   sortingOrders.done
                     ? new Date(a.date) - new Date(b.date)
@@ -143,7 +143,7 @@ export default function ListBoard({
           </div>
           <div>
             {reviseList.length > 0 ? (
-              [...reviseList] // Spread into a new array to avoid mutating the original list
+              [...reviseList]
                 .sort((a, b) =>
                   sortingOrders.revise
                     ? new Date(a.date) - new Date(b.date)

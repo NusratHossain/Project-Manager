@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { useTaskDispatcher, useTasks } from "../contexts/TaskContext";
 import { defaultTask } from "../data/Tasks";
 import {
@@ -45,8 +46,10 @@ export default function AddTaskModal({
         (a, b) => new Date(a.date) - new Date(b.date)
       );
       setFilteredTasks([...sortedTasks, task]);
+      toast.success("Task Created Successfully !");
     } else {
       if (!hasTaskChanged) {
+        toast.warning("Task Not Changed!");
         alert(
           "You haven't changed the task at all. To proceed, either change something or cancel the transaction. Thank you!"
         );
@@ -57,6 +60,7 @@ export default function AddTaskModal({
         .filter((item) => item.id !== task.id)
         .sort((a, b) => new Date(a.date) - new Date(b.date));
       setFilteredTasks([...newTaskList, task]);
+      toast.success("Task Updated Successfully!");
     }
 
     resetForm();
