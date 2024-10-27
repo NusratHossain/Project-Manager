@@ -19,8 +19,7 @@ export default function TaskBoard() {
       ? tasks.filter((task) =>
           task.title.toLowerCase().includes(searchTerm.toLowerCase())
         )
-      : [...tasks];
-
+      : [...tasks]; // if empty return original taskList
     setFilteredTasks(filteredSearchedTasks);
   };
 
@@ -28,7 +27,7 @@ export default function TaskBoard() {
     if (isAdd) {
       addTask(task);
       toast.success("Task Created Successfully!");
-      setFilteredTasks((prevTasks) => [...prevTasks, task]);
+      setFilteredTasks([...tasks, task]); // update with original taskList
     } else {
       updateTask(task);
       toast.success("Task Updated Successfully!");
