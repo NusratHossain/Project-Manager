@@ -67,6 +67,7 @@ export default function AddTaskModal({
   };
 
   const handleClose = () => {
+    setFilteredTasks(tasks);
     setTaskToUpdate(null);
     setShowModal(false);
   };

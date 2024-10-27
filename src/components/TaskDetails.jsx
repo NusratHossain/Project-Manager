@@ -29,6 +29,7 @@ export default function TaskDetails({ filteredTasks, setFilteredTasks }) {
       )}
       <ListBoard
         filteredTasks={filteredTasks}
+        setFilteredTasks={setFilteredTasks}
         setShowModal={setShowModal}
         setTaskToUpdate={setTaskToUpdate}
       />

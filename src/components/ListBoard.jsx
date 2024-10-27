@@ -4,6 +4,7 @@ import TaskCard from "./TaskCard";
 import TaskListEmpty from "./TaskListEmpty";
 
 export default function ListBoard({
+  setFilteredTasks,
   filteredTasks,
   setShowModal,
   setTaskToUpdate,
@@ -50,6 +51,7 @@ export default function ListBoard({
                 )
                 .map((task, index) => (
                   <TaskCard
+                    setFilteredTasks={setFilteredTasks}
                     setTaskToUpdate={setTaskToUpdate}
                     setShowModal={setShowModal}
                     key={index}
@@ -84,6 +86,7 @@ export default function ListBoard({
                 )
                 .map((task, index) => (
                   <TaskCard
+                    setFilteredTasks={setFilteredTasks}
                     setTaskToUpdate={setTaskToUpdate}
                     setShowModal={setShowModal}
                     key={index}
@@ -117,6 +120,7 @@ export default function ListBoard({
                 )
                 .map((task, index) => (
                   <TaskCard
+                    setFilteredTasks={setFilteredTasks}
                     setTaskToUpdate={setTaskToUpdate}
                     setShowModal={setShowModal}
                     key={index}
@@ -151,6 +155,7 @@ export default function ListBoard({
                 )
                 .map((task, index) => (
                   <TaskCard
+                    setFilteredTasks={setFilteredTasks}
                     setTaskToUpdate={setTaskToUpdate}
                     setShowModal={setShowModal}
                     key={index}
