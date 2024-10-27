@@ -4,6 +4,7 @@ import AddTaskModal from "./AddTaskModal";
 import ListBoard from "./ListBoard";
 
 export default function TaskDetails({
+  handleAddEditTask,
   filteredTasks,
   setFilteredTasks,
   setSearchItem,
@@ -22,7 +23,9 @@ export default function TaskDetails({
           <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
           <div className="relative w-full max-w-xl p-8 mx-auto">
             <AddTaskModal
+              handleAddEditTask={handleAddEditTask}
               setSearchItem={setSearchItem}
+              setFilteredTasks={setFilteredTasks}
               filteredTasks={filteredTasks}
               taskToUpdate={taskToUpdate}
               setTaskToUpdate={setTaskToUpdate}

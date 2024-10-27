@@ -10,6 +10,7 @@ export default function ListBoard({
   setTaskToUpdate,
 }) {
   let tasks = filteredTasks;
+
   const [sortingOrders, setSortingOrders] = useState({
     toDo: false,
     onProgress: false,

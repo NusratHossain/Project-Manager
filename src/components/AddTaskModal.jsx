@@ -1,14 +1,11 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
-import { useTaskDispatcher, useTasks } from "../contexts/TaskContext";
+import {  useTasks } from "../contexts/TaskContext";
 import { defaultTask } from "../data/Tasks";
-import {
-  FormEdittingValidation,
-  FormValidation,
-} from "../utils/formValidation";
 
 export default function AddTaskModal({
+  handleAddEditTask,
   setSearchItem,
+  setFilteredTasks,
   taskToUpdate = null,
   setTaskToUpdate,
   setShowModal,
@@ -17,7 +14,6 @@ export default function AddTaskModal({
   const isAdd = Object.is(taskToUpdate, null);
 
   const tasks = useTasks();
-  const dispatch = useTaskDispatcher();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -29,51 +25,15 @@ export default function AddTaskModal({
     });
   };
 
-  const handleCreateTask = (event, task) => {
-    event.preventDefault();
-    const { notValidated, fieldsNotFilled } = FormValidation(task);
-    const hasTaskChanged = FormEdittingValidation(tasks, task);
-
-    if (notValidated) {
-      alert(`Please fill in all the mandatory fields: ${fieldsNotFilled}.`);
-      return;
-    }
-
-    if (isAdd) {
-      addTask(task);
-      toast.success("Task Created Successfully !");
-    } else {
-      if (!hasTaskChanged) {
-        toast.warning("Task Not Changed!");
-        alert(
-          "You haven't changed the task at all. To proceed, either change something or cancel the transaction. Thank you!"
-        );
-        return;
-      }
-      updateTask(task);
-      toast.success("Task Updated Successfully!");
-    }
-    resetForm();
-  };
-
   const handleClose = () => {
+    setFilteredTasks(tasks);
     setTaskToUpdate(null);
     setShowModal(false);
   };
 
-  const addTask = (task) => {
-    dispatch({
-      type: "added",
-      task,
-      id: crypto.randomUUID(),
-    });
-  };
-
-  const updateTask = (task) => {
-    dispatch({
-      type: "changed",
-      task,
-    });
+  const handleCreateTask = (event, task) => {
+    handleAddEditTask(event, task, isAdd);
+    resetForm();
   };
 
   const resetForm = () => {
