@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useTaskDispatcher, useTasks } from "../contexts/TaskContext";
-import {
-  FormEdittingValidation,
-  FormValidation,
-} from "../utils/formValidation";
 import TaskDetails from "./TaskDetails";
 import TopBar from "./TopBar";
 
@@ -28,31 +24,17 @@ export default function TaskBoard() {
     setFilteredTasks(filteredSearchedTasks);
   };
 
-  const handleCreateTask = (event, task, isAdd) => {
-    event.preventDefault();
-    const { notValidated, fieldsNotFilled } = FormValidation(task);
-    const hasTaskChanged = FormEdittingValidation(tasks, task);
-
-    if (notValidated) {
-      alert(`Please fill in all the mandatory fields: ${fieldsNotFilled}.`);
-      return;
-    }
-
+  const handleCreateTask = (task, isAdd) => {
     if (isAdd) {
-      setFilteredTasks([...tasks, task]);
       addTask(task);
       toast.success("Task Created Successfully!");
+      setFilteredTasks((prevTasks) => [...prevTasks, task]);
     } else {
-      if (!hasTaskChanged) {
-        alert(
-          "You haven't changed the task at all. To proceed, either change something or cancel the transaction. Thank you!"
-        );
-        return;
-      }
       updateTask(task);
       toast.success("Task Updated Successfully!");
-      let newTaskList = tasks.filter((item) => item.id !== task.id);
-      setFilteredTasks([...newTaskList, task]);
+      setFilteredTasks((prevTasks) =>
+        prevTasks.map((item) => (item.id === task.id ? task : item))
+      );
     }
   };
 

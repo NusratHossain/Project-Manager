@@ -1,6 +1,10 @@
 import { useState } from "react";
-import {  useTasks } from "../contexts/TaskContext";
+import { useTasks } from "../contexts/TaskContext";
 import { defaultTask } from "../data/Tasks";
+import {
+  FormEdittingValidation,
+  FormValidation,
+} from "../utils/formValidation";
 
 export default function AddTaskModal({
   handleAddEditTask,
@@ -32,7 +36,22 @@ export default function AddTaskModal({
   };
 
   const handleCreateTask = (event, task) => {
-    handleAddEditTask(event, task, isAdd);
+    event.preventDefault();
+    const { notValidated, fieldsNotFilled } = FormValidation(task);
+    const hasTaskChanged = FormEdittingValidation(tasks, task);
+
+    if (notValidated) {
+      alert(`Please fill in all the mandatory fields: ${fieldsNotFilled}.`);
+      return;
+    }
+
+    if (!hasTaskChanged) {
+      alert(
+        "You haven't changed the task at all. To proceed, either change something or cancel the transaction. Thank you!"
+      );
+      return;
+    }
+    handleAddEditTask(task, isAdd);
     resetForm();
   };
 
