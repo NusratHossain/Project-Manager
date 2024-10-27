@@ -5,13 +5,12 @@ import HomePage from "./components/HomePage";
 function App() {
   return (
     <>
-      <HomePage />;
+      <HomePage />
       <ToastContainer
         position="bottom-right"
         transition={Zoom}
         autoClose={1500}
       />
-      ;
     </>
   );
 }
