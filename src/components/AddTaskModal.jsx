@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { useTaskDispatcher, useTasks } from "./contexts/TaskContext";
-import { defaultTask } from "./data/Tasks";
-import { FormEdittingValidation, FormValidation } from "./utils/formValidation";
+import { useTaskDispatcher, useTasks } from "../contexts/TaskContext";
+import { defaultTask } from "../data/Tasks";
+import {
+  FormEdittingValidation,
+  FormValidation,
+} from "../utils/formValidation";
 
 export default function AddTaskModal({
   filteredTasks,

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AddTaskModal from "../AddTaskModal";
 import AddTask from "./AddTask";
+import AddTaskModal from "./AddTaskModal";
 import ListBoard from "./ListBoard";
 
 export default function TaskDetails({ filteredTasks, setFilteredTasks }) {

@@ -1,8 +1,7 @@
-// import { useTasks } from "../contexts/TaskContext";
 import { useState } from "react";
-import TaskListEmpty from "../TaskListEmpty";
 import SortAsending from "./svg/SortAsending";
 import TaskCard from "./TaskCard";
+import TaskListEmpty from "./TaskListEmpty";
 
 export default function ListBoard({
   filteredTasks,
@@ -11,10 +10,10 @@ export default function ListBoard({
 }) {
   let tasks = filteredTasks;
   const [sortingOrders, setSortingOrders] = useState({
-    toDo: true,
-    onProgress: true,
-    done: true,
-    revise: true,
+    toDo: false,
+    onProgress: false,
+    done: false,
+    revise: false,
   });
 
   const toDoList = tasks.filter((item) => item.category === "to-do");
