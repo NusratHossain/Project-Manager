@@ -8,7 +8,6 @@ import {
 
 export default function AddTaskModal({
   handleAddEditTask,
-  setSearchItem,
   setFilteredTasks,
   taskToUpdate = null,
   setTaskToUpdate,
@@ -56,7 +55,6 @@ export default function AddTaskModal({
   };
 
   const resetForm = () => {
-    setSearchItem("");
     setTask(defaultTask);
     setTaskToUpdate(null);
     setShowModal(false);

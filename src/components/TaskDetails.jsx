@@ -7,7 +7,6 @@ export default function TaskDetails({
   handleAddEditTask,
   filteredTasks,
   setFilteredTasks,
-  setSearchItem,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
@@ -16,7 +15,7 @@ export default function TaskDetails({
     <div className="mx-auto max-w-7xl p-6">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-bold">Projectify</h2>
-        <AddTask setSearchItem={setSearchItem} setShowModal={setShowModal} />
+        <AddTask setShowModal={setShowModal} />
       </div>
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -24,9 +23,7 @@ export default function TaskDetails({
           <div className="relative w-full max-w-xl p-8 mx-auto">
             <AddTaskModal
               handleAddEditTask={handleAddEditTask}
-              setSearchItem={setSearchItem}
               setFilteredTasks={setFilteredTasks}
-              filteredTasks={filteredTasks}
               taskToUpdate={taskToUpdate}
               setTaskToUpdate={setTaskToUpdate}
               setShowModal={setShowModal}

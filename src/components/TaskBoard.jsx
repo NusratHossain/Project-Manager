@@ -36,6 +36,7 @@ export default function TaskBoard() {
         tasks.map((item) => (item.id === task.id ? task : item))
       ); // new list with updated task
     }
+    setSearchItem("");
   };
 
   const addTask = (task) => {
@@ -60,7 +61,6 @@ export default function TaskBoard() {
         handleAddEditTask={handleCreateEditTask}
         filteredTasks={filteredTasks}
         setFilteredTasks={setFilteredTasks}
-        setSearchItem={setSearchItem}
       />
     </main>
   );
