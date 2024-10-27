@@ -10,7 +10,6 @@ export default function ListBoard({
   setTaskToUpdate,
 }) {
   let tasks = filteredTasks;
-
   const [sortingOrders, setSortingOrders] = useState({
     toDo: false,
     onProgress: false,
@@ -32,6 +31,13 @@ export default function ListBoard({
     }));
   };
 
+  const sorted = (list, state) =>
+    [...list].sort((a, b) =>
+      state
+        ? new Date(a.date) - new Date(b.date)
+        : new Date(b.date) - new Date(a.date)
+    );
+
   return (
     <div className="-mx-2 mb-6 flex flex-wrap">
       <div className="mb-4 w-full px-2 sm:w-1/2 md:w-1/4">
@@ -44,22 +50,16 @@ export default function ListBoard({
           </div>
           <div>
             {toDoList.length > 0 ? (
-              [...toDoList]
-                .sort((a, b) =>
-                  sortingOrders.todo
-                    ? new Date(a.date) - new Date(b.date)
-                    : new Date(b.date) - new Date(a.date)
-                )
-                .map((task, index) => (
-                  <TaskCard
-                    setFilteredTasks={setFilteredTasks}
-                    setTaskToUpdate={setTaskToUpdate}
-                    setShowModal={setShowModal}
-                    key={index}
-                    task={task}
-                    color={"text-indigo-600"}
-                  />
-                ))
+              sorted(toDoList, sortingOrders.todo).map((task, index) => (
+                <TaskCard
+                  setFilteredTasks={setFilteredTasks}
+                  setTaskToUpdate={setTaskToUpdate}
+                  setShowModal={setShowModal}
+                  key={index}
+                  task={task}
+                  color={"text-indigo-600"}
+                />
+              ))
             ) : (
               <TaskListEmpty />
             )}
@@ -79,13 +79,8 @@ export default function ListBoard({
           </div>
           <div>
             {onProgressList.length > 0 ? (
-              [...onProgressList]
-                .sort((a, b) =>
-                  sortingOrders.onProgress
-                    ? new Date(a.date) - new Date(b.date)
-                    : new Date(b.date) - new Date(a.date)
-                )
-                .map((task, index) => (
+              sorted(onProgressList, sortingOrders.onProgress).map(
+                (task, index) => (
                   <TaskCard
                     setFilteredTasks={setFilteredTasks}
                     setTaskToUpdate={setTaskToUpdate}
@@ -94,7 +89,8 @@ export default function ListBoard({
                     task={task}
                     color={"text-yellow-500"}
                   />
-                ))
+                )
+              )
             ) : (
               <TaskListEmpty />
             )}
@@ -113,22 +109,16 @@ export default function ListBoard({
 
           <div>
             {doneList.length > 0 ? (
-              [...doneList]
-                .sort((a, b) =>
-                  sortingOrders.done
-                    ? new Date(a.date) - new Date(b.date)
-                    : new Date(b.date) - new Date(a.date)
-                )
-                .map((task, index) => (
-                  <TaskCard
-                    setFilteredTasks={setFilteredTasks}
-                    setTaskToUpdate={setTaskToUpdate}
-                    setShowModal={setShowModal}
-                    key={index}
-                    task={task}
-                    color={"text-teal-500"}
-                  />
-                ))
+              sorted(doneList, sortingOrders.done).map((task, index) => (
+                <TaskCard
+                  setFilteredTasks={setFilteredTasks}
+                  setTaskToUpdate={setTaskToUpdate}
+                  setShowModal={setShowModal}
+                  key={index}
+                  task={task}
+                  color={"text-teal-500"}
+                />
+              ))
             ) : (
               <TaskListEmpty />
             )}
@@ -148,22 +138,16 @@ export default function ListBoard({
           </div>
           <div>
             {reviseList.length > 0 ? (
-              [...reviseList]
-                .sort((a, b) =>
-                  sortingOrders.revise
-                    ? new Date(a.date) - new Date(b.date)
-                    : new Date(b.date) - new Date(a.date)
-                )
-                .map((task, index) => (
-                  <TaskCard
-                    setFilteredTasks={setFilteredTasks}
-                    setTaskToUpdate={setTaskToUpdate}
-                    setShowModal={setShowModal}
-                    key={index}
-                    task={task}
-                    color={"text-rose-500"}
-                  />
-                ))
+              sorted(reviseList, sortingOrders.revise).map((task, index) => (
+                <TaskCard
+                  setFilteredTasks={setFilteredTasks}
+                  setTaskToUpdate={setTaskToUpdate}
+                  setShowModal={setShowModal}
+                  key={index}
+                  task={task}
+                  color={"text-rose-500"}
+                />
+              ))
             ) : (
               <TaskListEmpty />
             )}
