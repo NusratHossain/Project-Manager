@@ -15,15 +15,16 @@ export default function TaskBoard() {
     const searchTerm = event.target.value;
     setSearchItem(searchTerm);
 
-    const filteredSearchedTasks = searchTerm
+    const trimmedSearchTerm = searchTerm.trim().toLowerCase(); // trimming whitespaces
+    const filteredSearchedTasks = trimmedSearchTerm
       ? tasks.filter((task) =>
-          task.title.toLowerCase().includes(searchTerm.toLowerCase())
+          task.title.toLowerCase().includes(trimmedSearchTerm)
         )
       : [...tasks]; // if empty return original taskList
     setFilteredTasks(filteredSearchedTasks);
   };
 
-  const handleCreateTask = (task, isAdd) => {
+  const handleCreateEditTask = (task, isAdd) => {
     if (isAdd) {
       addTask(task);
       toast.success("Task Created Successfully!");
@@ -31,9 +32,9 @@ export default function TaskBoard() {
     } else {
       updateTask(task);
       toast.success("Task Updated Successfully!");
-      setFilteredTasks((prevTasks) =>
-        prevTasks.map((item) => (item.id === task.id ? task : item))
-      );
+      setFilteredTasks(
+        tasks.map((item) => (item.id === task.id ? task : item))
+      ); // new list with updated task
     }
   };
 
@@ -56,7 +57,7 @@ export default function TaskBoard() {
     <main className="flex-1 overflow-y-auto overflow-x-hidden">
       <TopBar searchItem={searchItem} onSearch={handleSearch} />
       <TaskDetails
-        handleAddEditTask={handleCreateTask}
+        handleAddEditTask={handleCreateEditTask}
         filteredTasks={filteredTasks}
         setFilteredTasks={setFilteredTasks}
         setSearchItem={setSearchItem}
