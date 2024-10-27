@@ -1,3 +1,6 @@
+# Project Manager
+
+<img src="./public/feature-design.svg" alt="project-manager" width="1400" />
 
 ## এসাইনমেন্টে আপনাকে যা যা করতে হবেঃ
 
