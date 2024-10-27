@@ -1,10 +1,4 @@
-// import { useState } from "react";
-// import { useTasks } from "../contexts/TaskContext";
-
 export default function SearchBar({ searchItem, onSearch }) {
-  // const [searchItem, setSearchItem] = useState("");
-  // const tasks = useTasks();
-
   const handleSearch = (event) => {
     onSearch(event);
   };
