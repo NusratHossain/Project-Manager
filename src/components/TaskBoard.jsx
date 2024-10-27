@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useTaskDispatcher, useTasks } from "../contexts/TaskContext";
-import TaskContextProvider from "../contexts/TaskContextProvider";
 import {
   FormEdittingValidation,
   FormValidation,
@@ -25,7 +24,6 @@ export default function TaskBoard() {
           task.title.toLowerCase().includes(searchTerm.toLowerCase())
         )
       : [...tasks];
-    console.log({ filteredTasks, tasks, filteredSearchedTasks });
 
     setFilteredTasks(filteredSearchedTasks);
   };
@@ -44,7 +42,6 @@ export default function TaskBoard() {
       setFilteredTasks([...tasks, task]);
       addTask(task);
       toast.success("Task Created Successfully!");
-      console.log({ tasks });
     } else {
       if (!hasTaskChanged) {
         alert(
@@ -75,16 +72,14 @@ export default function TaskBoard() {
   };
 
   return (
-    <TaskContextProvider>
-      <main className="flex-1 overflow-y-auto overflow-x-hidden">
-        <TopBar searchItem={searchItem} onSearch={handleSearch} />
-        <TaskDetails
-          handleAddEditTask={handleCreateTask}
-          filteredTasks={filteredTasks}
-          setFilteredTasks={setFilteredTasks}
-          setSearchItem={setSearchItem}
-        />
-      </main>
-    </TaskContextProvider>
+    <main className="flex-1 overflow-y-auto overflow-x-hidden">
+      <TopBar searchItem={searchItem} onSearch={handleSearch} />
+      <TaskDetails
+        handleAddEditTask={handleCreateTask}
+        filteredTasks={filteredTasks}
+        setFilteredTasks={setFilteredTasks}
+        setSearchItem={setSearchItem}
+      />
+    </main>
   );
 }
