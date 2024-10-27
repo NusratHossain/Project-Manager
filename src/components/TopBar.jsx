@@ -1,7 +1,7 @@
 import Notifications from "./Notifications";
 import SearchBar from "./SearchBar";
 
-export default function TopBar({ setFilteredTasks }) {
+export default function TopBar({ searchItem, onSearch }) {
   return (
     <header className="flex items-center justify-between bg-gray-800 p-4">
       <button className="lg:hidden">
@@ -20,7 +20,7 @@ export default function TopBar({ setFilteredTasks }) {
           ></path>
         </svg>
       </button>
-      <SearchBar setFilteredTasks={setFilteredTasks} />
+      <SearchBar searchItem={searchItem} onSearch={onSearch} />
       <Notifications />
     </header>
   );

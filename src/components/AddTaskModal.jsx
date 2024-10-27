@@ -8,8 +8,7 @@ import {
 } from "../utils/formValidation";
 
 export default function AddTaskModal({
-  filteredTasks,
-  setFilteredTasks,
+  setSearchItem,
   taskToUpdate = null,
   setTaskToUpdate,
   setShowModal,
@@ -42,10 +41,6 @@ export default function AddTaskModal({
 
     if (isAdd) {
       addTask(task);
-      let sortedTasks = filteredTasks.sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-      );
-      setFilteredTasks([...sortedTasks, task]);
       toast.success("Task Created Successfully !");
     } else {
       if (!hasTaskChanged) {
@@ -56,18 +51,12 @@ export default function AddTaskModal({
         return;
       }
       updateTask(task);
-      let newTaskList = filteredTasks
-        .filter((item) => item.id !== task.id)
-        .sort((a, b) => new Date(a.date) - new Date(b.date));
-      setFilteredTasks([...newTaskList, task]);
       toast.success("Task Updated Successfully!");
     }
-
     resetForm();
   };
 
   const handleClose = () => {
-    setFilteredTasks(tasks);
     setTaskToUpdate(null);
     setShowModal(false);
   };
@@ -88,6 +77,7 @@ export default function AddTaskModal({
   };
 
   const resetForm = () => {
+    setSearchItem("");
     setTask(defaultTask);
     setTaskToUpdate(null);
     setShowModal(false);

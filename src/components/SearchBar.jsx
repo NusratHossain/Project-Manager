@@ -1,21 +1,12 @@
-import { useState } from "react";
-import { useTasks } from "../contexts/TaskContext";
+// import { useState } from "react";
+// import { useTasks } from "../contexts/TaskContext";
 
-export default function SearchBar({ setFilteredTasks }) {
-  const [searchItem, setSearchItem] = useState("");
-  const tasks = useTasks();
+export default function SearchBar({ searchItem, onSearch }) {
+  // const [searchItem, setSearchItem] = useState("");
+  // const tasks = useTasks();
 
   const handleSearch = (event) => {
-    const searchTerm = event.target.value;
-    setSearchItem(searchTerm);
-
-    const filteredTasks = searchTerm
-      ? tasks.filter((task) =>
-          task.title.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      :[...tasks];
-
-    setFilteredTasks(filteredTasks);
+    onSearch(event);
   };
 
   return (
